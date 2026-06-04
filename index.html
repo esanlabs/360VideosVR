@@ -120,6 +120,8 @@
     <img id="imgAuditorio2" src="btcss-1.jpg"> 
     <img id="imgEvento" src="fuentte.jpg">
     <img id="imgLabsNuevos" src="eventoss.jpg">
+
+    <img id="imagenLibro" src="libroo.png" crossorigin="anonymous">
      
     <audio id="audioBienvenida" src="audio.mp3" preload="auto" crossorigin="anonymous"></audio>
      
@@ -153,6 +155,14 @@
       <a-text value="Descubre nuestro legado y vive el futuro" color="#696a6d" width="2.0" align="left" position="-0.85 -0.10 0.02" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf"></a-text>
   </a-entity>
 
+  <a-entity id="panelPresentacionEsan" position="0 2.6 -15"
+            animation="property: position; to: 0 2.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+    <a-entity geometry="primitive: plane; width: 3.2; height: 0.6" material="shader: flat; color: #1A1A1A; opacity: 0.85; transparent: true"></a-entity>
+    <a-entity geometry="primitive: plane; width: 3.24; height: 0.64" position="0 0 -0.01" material="shader: flat; color: #FFFFFF; opacity: 0.5; transparent: true"></a-entity>
+    <a-text value="BIENVENIDO AL UNIVERSO ESAN" color="#E3173E" align="center" width="2.8" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 0.12 0.02"></a-text>
+    <a-text value="Descubre nuestro legado y vive el futuro" color="#DFDFDF" align="center" width="2.3" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 -0.14 0.02"></a-text>
+  </a-entity>
+
   <a-entity id="grupoCine" visible="false">
     <a-video id="pantallaVideo"
              src="#videoUni"
@@ -172,7 +182,13 @@
         <a-circle id="btnReset" class="clickable" radius="1.1" color="#FFFFFF" position="-8 0 0"
                   animation__scale="property: scale; to: 1.2 1.2 1.2; dur: 200; startEvents: mouseenter"
                   animation__rescale="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave">
-          <a-text value="Repetir \nvideo" color="#000" align="center" width="4" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.15 0.1"></a-text>
+          <a-entity position="0 0 0.02">
+            <a-plane width="0.32" height="0.08" color="#000000" material="shader:flat" position="0 0.16 0"></a-plane>
+            <a-plane width="0.32" height="0.08" color="#000000" material="shader:flat" position="0 -0.16 0"></a-plane>
+            <a-plane width="0.08" height="0.4" color="#000000" material="shader:flat" position="-0.16 0 0"></a-plane>
+            <a-plane width="0.08" height="0.16" color="#000000" material="shader:flat" position="0.16 -0.08 0"></a-plane>
+            <a-entity geometry="primitive: triangle; vertexA: 0.16 0.28 0; vertexB: -0.02 0.08 0; vertexC: 0.34 0.08 0" material="shader:flat; color:#000000"></a-entity>
+          </a-entity>
         </a-circle>
         
         <a-circle id="btnNormal" class="clickable" radius="1.1" color="#FFFFFF" position="-4 0 0"
@@ -184,7 +200,11 @@
         <a-circle id="btnPausa" class="clickable" radius="1.4" color="#E3173E" position="0 0 0"
                   animation__scale="property: scale; to: 1.2 1.2 1.2; dur: 200; startEvents: mouseenter"
                   animation__rescale="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave">
-          <a-text id="txtPausa" value="Pausa" color="#FFFFFF" align="center" width="4" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.15 0.1"></a-text>
+          <a-entity id="iconPausaContainer" position="0 0 0.02">
+            <a-plane id="lineaPausa1" width="0.12" height="0.45" color="#FFFFFF" material="shader:flat" position="-0.12 0 0"></a-plane>
+            <a-plane id="lineaPausa2" width="0.12" height="0.45" color="#FFFFFF" material="shader:flat" position="0.12 0 0"></a-plane>
+            <a-entity id="trianguloPlay" geometry="primitive: triangle; vertexA: 0.22 0 0; vertexB: -0.14 0.22 0; vertexC: -0.14 -0.22 0" material="shader:flat; color:#FFFFFF" visible="false"></a-entity>
+          </a-entity>
         </a-circle>
         
         <a-circle id="btnRapido" class="clickable" radius="1.1" color="#FFFFFF" position="4 0 0"
@@ -196,7 +216,10 @@
         <a-circle id="btnSalir" class="clickable" radius="1.1" color="#E3173E" position="8 0 0"
                   animation__scale="property: scale; to: 1.2 1.2 1.2; dur: 200; startEvents: mouseenter"
                   animation__rescale="property: scale; to: 1 1 1; dur: 200; startEvents: mouseleave">
-          <a-text value="Explorar \notras\nopciones" color="#FFFFFF" align="center" width="3.5" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.2 0.1"></a-text>
+          <a-entity position="0 0 0.02">
+            <a-plane width="0.28" height="0.22" color="#FFFFFF" material="shader:flat" position="0 -0.06 0"></a-plane>
+            <a-entity geometry="primitive: triangle; vertexA: 0 0.20 0; vertexB: -0.20 0.04 0; vertexC: 0.20 0.04 0" material="shader:flat; color:#FFFFFF"></a-entity>
+          </a-entity>
         </a-circle>
       </a-entity>
     </a-entity>
@@ -204,70 +227,128 @@
 
   <a-entity id="redNeuronal" visible="true">
     <a-entity id="lineaFundador"
-              line="start: -2.1 1.6 -15; end: -0.9 2.1 -15; color: #000000; opacity: 0.8"
-              animation__start="property: line.start; to: -2.1 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: -0.9 2.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: -2.2 1.6 -15; end: -1.1 1.1 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: -2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
     <a-entity id="lineaLaboratorios"
-              line="start: -0.9 2.1 -15; end: -0.3 1.1 -15; color: #000000; opacity: 0.8"
-              animation__start="property: line.start; to: -0.9 2.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: -0.3 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: -1.1 1.1 -15; end: 0.0 1.6 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
     <a-entity id="lineaNuevosLabs"
-              line="start: -0.3 1.1 -15; end: 0.9 2.1 -15; color: #000000; opacity: 0.8"
-              animation__start="property: line.start; to: -0.3 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: 0.9 2.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: 0.0 1.6 -15; end: 1.1 1.1 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
     <a-entity id="lineaTour"
-              line="start: -0.3 1.1 -15; end: 2.1 1.6 -15; color: #000000; opacity: 0.8"
-              animation__start="property: line.start; to: -0.3 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: 2.1 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: 1.1 1.1 -15; end: 2.2 1.6 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: 2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
   </a-entity>
 
-  <a-entity id="contenedorBoton" position="-2.1 1.6 -15"
-            animation="property: position; to: -2.1 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+  <a-entity id="contenedorBoton" position="-2.2 1.6 -15"
+            animation="property: position; to: -2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
     <a-circle id="btnAccion" class="clickable" color="#000" opacity="0.8" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-text id="textoBoton" value="Conoce nuestra\nhistoria" align="center" baseline="center" width="0.6" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0 0.05"></a-text>
+      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="-0.06 0.08 0.02" rotation="0 0 14"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.015; height: 0.13" material="shader: flat; color: #FFFFFF" position="-0.12 0.01 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="-0.06 -0.05 0.02" rotation="0 0 -14"></a-entity>
+
+      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="0.06 0.08 0.02" rotation="0 0 -14"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.015; height: 0.13" material="shader: flat; color: #FFFFFF" position="0.12 0.01 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="0.06 -0.05 0.02" rotation="0 0 14"></a-entity>
+
+      <a-entity geometry="primitive: plane; width: 0.015; height: 0.14" material="shader: flat; color: #FFFFFF" position="0 0.01 0.02"></a-entity>
+
+      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="-0.12 0.075 0.021"></a-circle>
+      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0.12 0.075 0.021"></a-circle>
+      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="-0.12 -0.055 0.021"></a-circle>
+      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0.12 -0.055 0.021"></a-circle>
+      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0 0.093 0.021"></a-circle>
+      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0 -0.065 0.021"></a-circle>
     </a-circle>
+    <a-text value="Nuestra\nHistoria" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
+    <a-text id="textoBoton" value="Nuestra\nHistoria" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorBotonFundador" position="-0.9 1.6 -15"
-            animation="property: position; to: -0.9 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-circle id="btnFundador" class="clickable" color="#000" opacity="0.8" radius="0.4" position="0 0.5 0"
+  <a-entity id="contenedorBotonFundador" position="-1.1 1.1 -15"
+            animation="property: position; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-circle id="btnFundador" class="clickable" color="#000" opacity="0.8" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-text id="textoBotonFundador" value="Descubre la historia del fundador de ESAN\nAlan B. Coleman" align="center" baseline="center" width="0.6" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.05 0.05"></a-text>
+      <a-circle radius="0.05" color="#FFFFFF" material="shader: flat" position="0 0.08 0.02"></a-circle>
+      
+      <a-entity geometry="primitive: plane; width: 0.022; height: 0.03" material="shader: flat; color: #FFFFFF" position="0 0.035 0.02"></a-entity>
+
+      <a-entity geometry="primitive: triangle; vertexA: -0.011 0.02 0; vertexB: -0.11 -0.05 0; vertexC: -0.011 -0.05 0" 
+                material="shader: flat; color: #FFFFFF" 
+                position="0 0 0.02"></a-entity>
+
+      <a-entity geometry="primitive: triangle; vertexA: 0.011 0.02 0; vertexB: 0.011 -0.05 0; vertexC: 0.11 -0.05 0" 
+                material="shader: flat; color: #FFFFFF" 
+                position="0 0 0.02"></a-entity>
+
+      <a-entity geometry="primitive: plane; width: 0.012; height: 0.05" material="shader: flat; color: #FFFFFF" position="0 -0.025 0.022"></a-entity>
+      <a-entity geometry="primitive: triangle; vertexA: 0 -0.05 0; vertexB: -0.006 -0.05 0; vertexC: 0 -0.062 0" material="shader: flat; color: #FFFFFF" position="0 0 0.022"></a-entity>
+      <a-entity geometry="primitive: triangle; vertexA: 0 -0.05 0; vertexB: 0 -0.062 0; vertexC: 0.006 -0.05 0" material="shader: flat; color: #FFFFFF" position="0 0 0.022"></a-entity>
+
     </a-circle>
+    <a-text value="Nuestro\nFundador" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
+    <a-text id="textoBotonFundador" value="Nuestro\nFundador" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorBotonLabs" position="-0.3 1.6 -15"
-            animation="property: position; to: -0.3 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-circle id="btnLaboratorios" class="clickable" color="#000" opacity="0.8" radius="0.4" position="0 -0.5 0"
+  <a-entity id="contenedorBotonLabs" position="0.0 1.6 -15"
+            animation="property: position; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-circle id="btnLaboratorios" class="clickable" color="#000" opacity="0.8" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-text id="textoBotonLabs" value="Carreras que transforman" align="center" baseline="center" width="0.6" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.05 0.05"></a-text>
+      <a-entity geometry="primitive: plane; width: 0.21; height: 0.21" material="shader: flat; color: #FFFFFF" position="0 0.06 0.02" rotation="65 0 45"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.13; height: 0.07" material="shader: flat; color: #FFFFFF" position="0 -0.05 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.015; height: 0.12" material="shader: flat; color: #FFFFFF" position="0.11 -0.01 0.021" rotation="0 0 -15"></a-entity>
+      <a-entity geometry="primitive: circle; radius: 0.012" color="#FFFFFF" material="shader: flat" position="0.13 -0.07 0.022"></a-entity>
     </a-circle>
+    <a-text value="Carreras que\nTransforman" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
+    <a-text id="textoBotonLabs" value="Carreras que\nTransforman" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorNuevosLabs" position="0.9 1.6 -15"
-            animation="property: position; to: 0.9 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-circle id="btnNuevosLabs" class="clickable" color="#000" opacity="0.8" radius="0.4" position="0 0.5 0"
+  <a-entity id="contenedorNuevosLabs" position="1.1 1.1 -15"
+            animation="property: position; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-circle id="btnNuevosLabs" class="clickable" color="#000" opacity="0.8" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-text id="textoBotonNuevosLabs" value="Explora\nLaboratorios\nESAN" align="center" baseline="center" width="0.6" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.05 0.05"></a-text>
+      <a-entity geometry="primitive: plane; width: 0.045; height: 0.16" material="shader: flat; color: #FFFFFF" position="-0.05 0.05 0.02" rotation="0 0 -25"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.035; height: 0.05" material="shader: flat; color: #DFDFDF" position="-0.09 0.11 0.022" rotation="0 0 -25"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.04; height: 0.14" material="shader: flat; color: #FFFFFF" position="0.04 0.01 0.02" rotation="0 0 15"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.11; height: 0.02" material="shader: flat; color: #FFFFFF" position="0 -0.03 0.023"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.16; height: 0.03" material="shader: flat; color: #FFFFFF" position="-0.01 -0.09 0.02"></a-entity>
     </a-circle>
+    <a-text value="Laboratorios\nTech" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
+    <a-text id="textoBotonNuevosLabs" value="Laboratorios\nTech" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorBotonTour" position="2.1 1.6 -15"
-            animation="property: position; to: 2.1 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+  <a-entity id="contenedorBotonTour" position="2.2 1.6 -15"
+            animation="property: position; to: 2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
     <a-circle id="btnTour" class="clickable" color="#000" opacity="0.8" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-text id="textoBotonTour" value="Explora\nla Universidad\nESAN" align="center" baseline="center" width="0.6" wrap-count="15" font="mozillavr" shader="msdf" negate="false" position="0 0.05 0.05"></a-text>
+      <a-entity geometry="primitive: triangle; vertexA: 0 0.13 0; vertexB: -0.15 0.04 0; vertexC: 0.15 0.04 0" material="shader: flat; color: #FFFFFF" position="0 0 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.26; height: 0.02" material="shader: flat; color: #FFFFFF" position="0 0.03 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="-0.09 -0.04 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="-0.03 -0.04 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="0.03 -0.04 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="0.09 -0.04 0.02"></a-entity>
+      <a-entity geometry="primitive: plane; width: 0.28; height: 0.02" material="shader: flat; color: #FFFFFF" position="0 -0.10 0.02"></a-entity>
     </a-circle>
+    <a-text value="Tour del\nCampus" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
+    <a-text id="textoBotonTour" value="Tour del\nCampus" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
   <a-entity id="camara" camera look-controls position="0 1.6 0">
@@ -329,8 +410,12 @@ const skyButacas = document.querySelector('#skyButacas');
 const oscurecerButacas = document.querySelector('#oscurecerButacas');
 const barraProgreso = document.querySelector('#barraProgreso');
 const textoDuracion = document.querySelector('#textoDuracion');
-const txtPausa = document.querySelector('#txtPausa');
 const camara = document.querySelector('#camara');
+
+// Selectores para el cambio geométrico dinámico del botón Pausa
+const lineap1 = document.querySelector('#lineaPausa1');
+const lineap2 = document.querySelector('#lineaPausa2');
+const triPlay = document.querySelector('#trianguloPlay');
 
 const ANCHO_BARRA = 20;
 
@@ -372,7 +457,7 @@ function iniciarCine(videoSeleccionado) {
   grupoCine.setAttribute('position', `${posX} 2.5 ${posZ}`);
   grupoCine.setAttribute('rotation', `0 ${angleY} 0`);
 
-  [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour, redNeuronal, document.querySelector('#panelBienvenida'), skyPrincipal].forEach(el => { if(el) el.setAttribute('visible', 'false'); });
+  [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour, redNeuronal, document.querySelector('#panelBienvenida'), skyPrincipal, document.querySelector('#panelPresentacionEsan')].forEach(el => { if(el) el.setAttribute('visible', 'false'); });
   [skyButacas, oscurecerButacas, grupoCine].forEach(el => el.setAttribute('visible', 'true'));
   oscurecerButacas.emit('luzOff'); 
 
@@ -393,17 +478,38 @@ document.querySelector('#btnTour').addEventListener('click', () => {
 });
 
 document.querySelector('#btnPausa').addEventListener('click', () => {
-  if (videoActual.paused) { videoActual.play(); txtPausa.setAttribute('value', 'Pausa'); }
-  else { videoActual.pause(); txtPausa.setAttribute('value', 'Play'); }
+  if (videoActual.paused) { 
+      videoActual.play(); 
+      // Mostrar barras de pausa, ocultar triángulo Play
+      lineap1.setAttribute('visible', 'true');
+      lineap2.setAttribute('visible', 'true');
+      triPlay.setAttribute('visible', 'false');
+  }
+  else { 
+      videoActual.pause(); 
+      // Ocultar barras de pausa, mostrar triángulo Play
+      lineap1.setAttribute('visible', 'false');
+      lineap2.setAttribute('visible', 'false');
+      triPlay.setAttribute('visible', 'true');
+  }
 });
 
 document.querySelector('#btnNormal').addEventListener('click', () => { videoActual.playbackRate = 1; });
 document.querySelector('#btnRapido').addEventListener('click', () => { videoActual.playbackRate = 2; });
-document.querySelector('#btnReset').addEventListener('click', () => { videoActual.currentTime = 0; videoActual.play(); });
+document.querySelector('#btnReset').addEventListener('click', () => { 
+    videoActual.currentTime = 0; 
+    videoActual.play(); 
+    lineap1.setAttribute('visible', 'true');
+    lineap2.setAttribute('visible', 'true');
+    triPlay.setAttribute('visible', 'false');
+});
 document.querySelector('#btnSalir').addEventListener('click', () => { videoActual.pause(); videoActual.dispatchEvent(new Event('ended')); });
 
 function finalizarVideo() {
   pantalla.emit('videoSale');
+  lineap1.setAttribute('visible', 'true');
+  lineap2.setAttribute('visible', 'true');
+  triPlay.setAttribute('visible', 'false');
   
   setTimeout(() => {
     grupoCine.setAttribute('visible', 'false');
@@ -411,58 +517,63 @@ function finalizarVideo() {
     skyPrincipal.setAttribute('visible', 'true');
     oscurecerButacas.emit('luzOn');
 
-    if(videoActual.id === 'videoUni') textoBoton.setAttribute('value', 'Vuelve a ver\nnuestra historia');
-    if(videoActual.id === 'videoFundador') textoBotonFundador.setAttribute('value', 'Explorar nuevamente la historia de Alan B. Coleman');
-    if(videoActual.id === 'video8') textoBotonLabs.setAttribute('value', 'Ver otra vez');
-    if(videoActual.id === 'video7a') textoBotonNuevosLabs.setAttribute('value', 'Revisitar\nLaboratorios\nESAN');
+    if(videoActual.id === 'videoUni') textoBoton.setAttribute('value', 'Nuestra\nHistoria');
+    if(videoActual.id === 'videoFundador') textoBotonFundador.setAttribute('value', 'Nuestro\nFundador');
+    if(videoActual.id === 'video8') textoBotonLabs.setAttribute('value', 'Carreras que\nTransforman');
+    if(videoActual.id === 'video7a') textoBotonNuevosLabs.setAttribute('value', 'Laboratorios\nTech');
     
-    textoBotonTour.setAttribute('value', 'Explora\nla Universidad\nESAN');
+    textoBotonTour.setAttribute('value', 'Tour del\nCampus');
 
-    const elementosConAnimacion = [
+    const KissAnimacion = [
       contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour,
       lineaFundador, lineaLabs, lineaNuevosLabs, lineaTour
     ];
 
-    elementosConAnimacion.forEach(el => {
+    KissAnimacion.forEach(el => {
       el.removeAttribute('animation');
       el.removeAttribute('animation__start');
       el.removeAttribute('animation__end');
     });
 
-    contenedorBtn.setAttribute('position', '-2.1 1.6 -15');
-    contenedorBtnFundador.setAttribute('position', '-0.9 1.6 -15');
-    contenedorBtnLabs.setAttribute('position', '-0.3 1.6 -15');
-    contenedorNuevosLabs.setAttribute('position', '0.9 1.6 -15');
-    contenedorBtnTour.setAttribute('position', '2.1 1.6 -15');
+    contenedorBtn.setAttribute('position', '-2.2 1.6 -15');
+    contenedorBtnFundador.setAttribute('position', '-1.1 1.1 -15');
+    contenedorBtnLabs.setAttribute('position', '0.0 1.6 -15');
+    contenedorNuevosLabs.setAttribute('position', '1.1 1.1 -15');
+    contenedorBtnTour.setAttribute('position', '2.2 1.6 -15');
     
-    lineaFundador.setAttribute('line', {start: '-2.1 1.6 -15', end: '-0.9 2.1 -15'});
-    lineaLabs.setAttribute('line', {start: '-0.9 2.1 -15', end: '-0.3 1.1 -15'});
-    lineaNuevosLabs.setAttribute('line', {start: '-0.3 1.1 -15', end:  '0.9 2.1 -15'});
-    lineaTour.setAttribute('line', {start: '-0.3 1.1 -15', end: '2.1 1.6 -15'});
+    lineaFundador.setAttribute('line', {start: '-2.2 1.6 -15', end: '-1.1 1.1 -15', color: '#FFFFFF'});
+    lineaLabs.setAttribute('line', {start: '-1.1 1.1 -15', end: '0.0 1.6 -15', color: '#FFFFFF'});
+    lineaNuevosLabs.setAttribute('line', {start: '0.0 1.6 -15', end:  '1.1 1.1 -15', color: '#FFFFFF'});
+    lineaTour.setAttribute('line', {start: '1.1 1.1 -15', end: '2.2 1.6 -15', color: '#FFFFFF'});
 
-    [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour, redNeuronal].forEach(el => el.setAttribute('visible', 'true'));
+    [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour, redNeuronal, document.querySelector('#panelPresentacionEsan')].forEach(el => { if(el) el.setAttribute('visible', 'true'); });
 
     setTimeout(() => {
       const dur = 6000;
       const ease = "easeOutCubic";
 
-      contenedorBtn.setAttribute('animation', `property: position; from: -2.1 1.6 -15; to: -2.1 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorBtnFundador.setAttribute('animation', `property: position; from: -0.9 1.6 -15; to: -0.9 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorBtnLabs.setAttribute('animation', `property: position; from: -0.3 1.6 -15; to: -0.3 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorNuevosLabs.setAttribute('animation', `property: position; from: 0.9 1.6 -15; to: 0.9 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorBtnTour.setAttribute('animation', `property: position; from: 2.1 1.6 -15; to: 2.1 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtn.setAttribute('animation', `property: position; from: -2.2 1.6 -15; to: -2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtnFundador.setAttribute('animation', `property: position; from: -1.1 1.1 -15; to: -1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtnLabs.setAttribute('animation', `property: position; from: 0.0 1.6 -15; to: 0.0 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorNuevosLabs.setAttribute('animation', `property: position; from: 1.1 1.1 -15; to: 1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtnTour.setAttribute('animation', `property: position; from: 2.2 1.6 -15; to: 2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
 
-      lineaFundador.setAttribute('animation__start', `property: line.start; from: -2.1 1.6 -15; to: -2.1 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaFundador.setAttribute('animation__end', `property: line.end; from: -0.9 2.1 -15; to: -0.9 2.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaFundador.setAttribute('animation__start', `property: line.start; from: -2.2 1.6 -15; to: -2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaFundador.setAttribute('animation__end', `property: line.end; from: -1.1 1.1 -15; to: -1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
 
-      lineaLabs.setAttribute('animation__start', `property: line.start; from: -0.9 2.1 -15; to: -0.9 2.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaLabs.setAttribute('animation__end', `property: line.end; from: -0.3 1.1 -15; to: -0.3 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaLabs.setAttribute('animation__start', `property: line.start; from: -1.1 1.1 -15; to: -1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaLabs.setAttribute('animation__end', `property: line.end; from: 0.0 1.6 -15; to: 0.0 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
 
-      lineaNuevosLabs.setAttribute('animation__start', `property: line.start; from: -0.3 1.1 -15; to: -0.3 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaNuevosLabs.setAttribute('animation__end', `property: line.end; from: 0.9 2.1 -15; to: 0.9 2.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaNuevosLabs.setAttribute('animation__start', `property: line.start; from: 0.0 1.6 -15; to: 0.0 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaNuevosLabs.setAttribute('animation__end', `property: line.end; from: 1.1 1.1 -15; to: 1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
       
-      lineaTour.setAttribute('animation__start', `property: line.start; from: -0.3 1.1 -15; to: -0.3 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaTour.setAttribute('animation__end', `property: line.end; from: 2.1 1.6 -15; to: 2.1 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaTour.setAttribute('animation__start', `property: line.start; from: 1.1 1.1 -15; to: 1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaTour.setAttribute('animation__end', `property: line.end; from: 2.2 1.6 -15; to: 2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+
+      if(document.querySelector('#panelPresentacionEsan')) {
+          document.querySelector('#panelPresentacionEsan').setAttribute('removeAttribute', 'animation');
+          document.querySelector('#panelPresentacionEsan').setAttribute('animation', `property: position; from: 0 2.6 -15; to: 0 2.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      }
     }, 100);
 
   }, 1500);
