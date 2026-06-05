@@ -93,6 +93,29 @@
         ctx.beginPath(); ctx.moveTo(s*.5,s*.01); ctx.lineTo(s*.5,s*.11); ctx.lineTo(s*.65,s*.06); ctx.closePath(); ctx.fill();
       }
 
+      function drawProntoIcon(ctx, s) {
+        ctx.lineCap='round'; ctx.lineJoin='round';
+        // Frame top bar
+        ctx.fillStyle='#ffffff'; ctx.fillRect(s*.2,s*.10,s*.6,s*.055);
+        // Frame bottom bar
+        ctx.fillRect(s*.2,s*.845,s*.6,s*.055);
+        // Top glass (outline)
+        ctx.strokeStyle='#ffffff'; ctx.lineWidth=s*.038;
+        ctx.beginPath(); ctx.moveTo(s*.22,s*.155); ctx.lineTo(s*.5,s*.50); ctx.lineTo(s*.78,s*.155); ctx.closePath(); ctx.stroke();
+        // Bottom glass (outline)
+        ctx.beginPath(); ctx.moveTo(s*.22,s*.845); ctx.lineTo(s*.5,s*.50); ctx.lineTo(s*.78,s*.845); ctx.closePath(); ctx.stroke();
+        // Sand top (red)
+        ctx.fillStyle='#E3173E';
+        ctx.beginPath(); ctx.moveTo(s*.3,s*.155); ctx.lineTo(s*.7,s*.155); ctx.lineTo(s*.5,s*.40); ctx.closePath(); ctx.fill();
+        // Sand bottom pool (red)
+        ctx.beginPath(); ctx.moveTo(s*.38,s*.845); ctx.lineTo(s*.62,s*.845); ctx.lineTo(s*.5,s*.65); ctx.closePath(); ctx.fill();
+        // Falling sand thread
+        ctx.fillRect(s*.477,s*.48,s*.046,s*.18);
+        // Inner glass shimmer
+        ctx.strokeStyle='rgba(255,255,255,0.28)'; ctx.lineWidth=s*.022;
+        ctx.beginPath(); ctx.moveTo(s*.32,s*.175); ctx.lineTo(s*.45,s*.35); ctx.stroke();
+      }
+
       // ========================================================
       // COMPONENTE: ICONO CANVAS
       // ========================================================
@@ -107,7 +130,7 @@
             const c = document.createElement('canvas');
             c.width = size; c.height = size;
             const ctx = c.getContext('2d');
-            const fns = { historia: drawHistoriaIcon, fundador: drawFundadorIcon, carreras: drawCarrerasIcon, labs: drawLabsIcon, tour: drawTourIcon };
+            const fns = { historia: drawHistoriaIcon, fundador: drawFundadorIcon, carreras: drawCarrerasIcon, labs: drawLabsIcon, tour: drawTourIcon, pronto: drawProntoIcon };
             if (fns[self.data.type]) fns[self.data.type](ctx, size);
             const tex = new THREE.CanvasTexture(c);
             mesh.material.map = tex;
@@ -342,29 +365,32 @@
 
   <a-entity id="redNeuronal" visible="true">
     <a-entity id="lineaFundador"
-              line="start: -2.2 1.6 -15; end: -1.1 1.1 -15; color: #FFFFFF; opacity: 0.8"
-              animation__start="property: line.start; to: -2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: -1.65 1.6 -15; end: -0.55 1.1 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: -1.65 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: -0.55 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
     <a-entity id="lineaLaboratorios"
-              line="start: -1.1 1.1 -15; end: 0.0 1.6 -15; color: #FFFFFF; opacity: 0.8"
-              animation__start="property: line.start; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: -0.55 1.1 -15; end: 0.55 1.6 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: -0.55 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: 0.55 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
     <a-entity id="lineaNuevosLabs"
-              line="start: 0.0 1.6 -15; end: 1.1 1.1 -15; color: #FFFFFF; opacity: 0.8"
-              animation__start="property: line.start; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
-              animation__end="property: line.end; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+              line="start: 0.55 1.6 -15; end: 1.65 1.1 -15; color: #FFFFFF; opacity: 0.8"
+              animation__start="property: line.start; to: 0.55 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
+              animation__end="property: line.end; to: 1.65 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
+    <!-- lineaTour comentada: Tour del Campus aún no disponible -->
+    <!--
     <a-entity id="lineaTour"
               line="start: 1.1 1.1 -15; end: 2.2 1.6 -15; color: #FFFFFF; opacity: 0.8"
               animation__start="property: line.start; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
               animation__end="property: line.end; to: 2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
+    -->
   </a-entity>
 
-  <a-entity id="contenedorBoton" position="-2.2 1.6 -15"
-            animation="property: position; to: -2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+  <a-entity id="contenedorBoton" position="-1.65 1.6 -15"
+            animation="property: position; to: -1.65 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
     <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
             radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
@@ -380,8 +406,8 @@
     <a-text id="textoBoton" value="Nuestra\nHistoria" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorBotonFundador" position="-1.1 1.1 -15"
-            animation="property: position; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+  <a-entity id="contenedorBotonFundador" position="-0.55 1.1 -15"
+            animation="property: position; to: -0.55 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
     <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
             radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
@@ -397,8 +423,8 @@
     <a-text id="textoBotonFundador" value="Nuestro\nFundador" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorBotonLabs" position="0.0 1.6 -15"
-            animation="property: position; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+  <a-entity id="contenedorBotonLabs" position="0.55 1.6 -15"
+            animation="property: position; to: 0.55 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
     <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
             radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
@@ -414,8 +440,8 @@
     <a-text id="textoBotonLabs" value="Carreras que\nTransforman" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
-  <a-entity id="contenedorNuevosLabs" position="1.1 1.1 -15"
-            animation="property: position; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
+  <a-entity id="contenedorNuevosLabs" position="1.65 1.1 -15"
+            animation="property: position; to: 1.65 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
     <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
             radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
@@ -431,6 +457,8 @@
     <a-text id="textoBotonNuevosLabs" value="Laboratorios\nTech" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
+  <!-- contenedorBotonTour comentado: Tour del Campus aún no disponible -->
+  <!--
   <a-entity id="contenedorBotonTour" position="2.2 1.6 -15"
             animation="property: position; to: 2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
@@ -447,9 +475,34 @@
     <a-text value="Tour del Campus\n(Muy Pronto)" align="center" baseline="top" width="1.2" wrap-count="16" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
     <a-text id="textoBotonTour" value="Tour del Campus\n(Muy Pronto)" align="center" baseline="top" width="1.2" wrap-count="16" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
+  -->
 
   <a-entity id="camara" camera look-controls position="0 1.6 0">
     <a-entity cursor="fuse: false; rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
+
+    <a-entity id="panelMuyPronto" position="0 0 -1.8" visible="false" scale="0 0 0">
+      <!-- Resplandor exterior -->
+      <a-plane width="1.14" height="0.64" color="#E3173E" opacity="0.14" material="shader: flat; transparent: true" position="0 0 -0.012"></a-plane>
+      <!-- Fondo principal -->
+      <a-plane width="1.06" height="0.56" color="#0d0d1a" opacity="0.97" material="shader: flat; transparent: true"></a-plane>
+      <!-- Barra roja superior -->
+      <a-plane width="1.06" height="0.052" color="#E3173E" material="shader: flat" position="0 0.254 0.005"></a-plane>
+      <!-- Acento rojo izquierdo -->
+      <a-plane width="0.038" height="0.56" color="#E3173E" material="shader: flat" position="-0.511 0 0.005"></a-plane>
+      <!-- Icono reloj de arena -->
+      <a-plane width="0.19" height="0.19" canvas-icon="type: pronto" material="shader: flat; transparent: true" position="-0.35 0.02 0.01"></a-plane>
+      <!-- Título -->
+      <a-text value="¡Muy Pronto!" color="#E3173E" align="left" width="2.1" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="-0.19 0.1 0.012"></a-text>
+      <!-- Subtítulo -->
+      <a-text value="Esta sección estará disponible\nmuy pronto. ¡Mantente atento!" color="#DFDFDF" align="left" width="1.62" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="-0.19 -0.07 0.012"></a-text>
+      <!-- Botón cerrar (X) -->
+      <a-circle id="btnCerrarProno" class="clickable" radius="0.046" color="#E3173E" material="shader: flat" position="0.474 0.232 0.014"
+                animation__enter="property: scale; to: 1.3 1.3 1.3; dur: 150; startEvents: mouseenter"
+                animation__leave="property: scale; to: 1 1 1; dur: 150; startEvents: mouseleave">
+        <a-plane width="0.052" height="0.009" color="#FFFFFF" material="shader: flat" position="0 0 0.01" rotation="0 0 45"></a-plane>
+        <a-plane width="0.052" height="0.009" color="#FFFFFF" material="shader: flat" position="0 0 0.01" rotation="0 0 -45"></a-plane>
+      </a-circle>
+    </a-entity>
   </a-entity>
 
   <a-entity laser-controls="hand: right" raycaster="objects: .clickable; far: 50" line="color: #FFD700"></a-entity>
@@ -492,6 +545,8 @@ const contenedorBtnFundador = document.querySelector('#contenedorBotonFundador')
 const contenedorBtnLabs = document.querySelector('#contenedorBotonLabs');
 const contenedorNuevosLabs = document.querySelector('#contenedorNuevosLabs');
 const contenedorBtnTour = document.querySelector('#contenedorBotonTour');
+const panelMuyPronto = document.querySelector('#panelMuyPronto');
+let timerProno = null;
 const redNeuronal = document.querySelector('#redNeuronal'); 
 const lineaFundador = document.querySelector('#lineaFundador'); 
 const lineaLabs = document.querySelector('#lineaLaboratorios');
@@ -554,6 +609,9 @@ function iniciarCine(videoSeleccionado) {
   grupoCine.setAttribute('position', `${posX} 2.5 ${posZ}`);
   grupoCine.setAttribute('rotation', `0 ${angleY} 0`);
 
+  if (timerProno) { clearTimeout(timerProno); timerProno = null; }
+  panelMuyPronto.setAttribute('visible', 'false');
+  panelMuyPronto.setAttribute('scale', '0 0 0');
   [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour, redNeuronal, document.querySelector('#panelBienvenida'), skyPrincipal, document.querySelector('#panelPresentacionEsan')].forEach(el => { if(el) el.setAttribute('visible', 'false'); });
   [skyButacas, oscurecerButacas, grupoCine].forEach(el => el.setAttribute('visible', 'true'));
   oscurecerButacas.emit('luzOff'); 
@@ -570,9 +628,18 @@ document.querySelector('#btnFundador').addEventListener('click', () => iniciarCi
 document.querySelector('#btnLaboratorios').addEventListener('click', () => iniciarCine(video8));
 document.querySelector('#btnNuevosLabs').addEventListener('click', () => iniciarCine(video7a));
 
-document.querySelector('#btnTour').addEventListener('click', () => {
-    window.location.href = 'https://esanlabs.github.io/recorrido/';
-});
+function cerrarPanelProno() {
+    if (timerProno) { clearTimeout(timerProno); timerProno = null; }
+    panelMuyPronto.removeAttribute('animation__entrar');
+    panelMuyPronto.setAttribute('animation__salir', 'property: scale; to: 0 0 0; dur: 350; easing: easeInBack');
+    setTimeout(() => panelMuyPronto.setAttribute('visible', 'false'), 360);
+}
+
+// btnTour comentado junto con su contenedor HTML
+// const _btnTour = document.querySelector('#btnTour');
+// if (_btnTour) _btnTour.addEventListener('click', () => { ... });
+
+document.querySelector('#btnCerrarProno').addEventListener('click', cerrarPanelProno);
 
 document.querySelector('#btnPausa').addEventListener('click', () => {
   if (videoActual.paused) { 
@@ -619,12 +686,13 @@ function finalizarVideo() {
     if(videoActual.id === 'video8') textoBotonLabs.setAttribute('value', 'Carreras que\nTransforman');
     if(videoActual.id === 'video7a') textoBotonNuevosLabs.setAttribute('value', 'Laboratorios\nTech');
     
-    textoBotonTour.setAttribute('value', 'Tour del Campus\n(Muy Pronto)');
+    // textoBotonTour comentado junto con su botón
+    // if(textoBotonTour) textoBotonTour.setAttribute('value', 'Tour del Campus\n(Muy Pronto)');
 
     const KissAnimacion = [
-      contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour,
-      lineaFundador, lineaLabs, lineaNuevosLabs, lineaTour
-    ];
+      contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs,
+      lineaFundador, lineaLabs, lineaNuevosLabs
+    ].filter(Boolean);
 
     KissAnimacion.forEach(el => {
       el.removeAttribute('animation');
@@ -632,40 +700,34 @@ function finalizarVideo() {
       el.removeAttribute('animation__end');
     });
 
-    contenedorBtn.setAttribute('position', '-2.2 1.6 -15');
-    contenedorBtnFundador.setAttribute('position', '-1.1 1.1 -15');
-    contenedorBtnLabs.setAttribute('position', '0.0 1.6 -15');
-    contenedorNuevosLabs.setAttribute('position', '1.1 1.1 -15');
-    contenedorBtnTour.setAttribute('position', '2.2 1.6 -15');
-    
-    lineaFundador.setAttribute('line', {start: '-2.2 1.6 -15', end: '-1.1 1.1 -15', color: '#FFFFFF'});
-    lineaLabs.setAttribute('line', {start: '-1.1 1.1 -15', end: '0.0 1.6 -15', color: '#FFFFFF'});
-    lineaNuevosLabs.setAttribute('line', {start: '0.0 1.6 -15', end:  '1.1 1.1 -15', color: '#FFFFFF'});
-    lineaTour.setAttribute('line', {start: '1.1 1.1 -15', end: '2.2 1.6 -15', color: '#FFFFFF'});
+    contenedorBtn.setAttribute('position', '-1.65 1.6 -15');
+    contenedorBtnFundador.setAttribute('position', '-0.55 1.1 -15');
+    contenedorBtnLabs.setAttribute('position', '0.55 1.6 -15');
+    contenedorNuevosLabs.setAttribute('position', '1.65 1.1 -15');
 
-    [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour, redNeuronal, document.querySelector('#panelPresentacionEsan')].forEach(el => { if(el) el.setAttribute('visible', 'true'); });
+    lineaFundador.setAttribute('line', {start: '-1.65 1.6 -15', end: '-0.55 1.1 -15', color: '#FFFFFF'});
+    lineaLabs.setAttribute('line', {start: '-0.55 1.1 -15', end: '0.55 1.6 -15', color: '#FFFFFF'});
+    lineaNuevosLabs.setAttribute('line', {start: '0.55 1.6 -15', end: '1.65 1.1 -15', color: '#FFFFFF'});
+
+    [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, redNeuronal, document.querySelector('#panelPresentacionEsan')].forEach(el => { if(el) el.setAttribute('visible', 'true'); });
 
     setTimeout(() => {
       const dur = 6000;
       const ease = "easeOutCubic";
 
-      contenedorBtn.setAttribute('animation', `property: position; from: -2.2 1.6 -15; to: -2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorBtnFundador.setAttribute('animation', `property: position; from: -1.1 1.1 -15; to: -1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorBtnLabs.setAttribute('animation', `property: position; from: 0.0 1.6 -15; to: 0.0 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorNuevosLabs.setAttribute('animation', `property: position; from: 1.1 1.1 -15; to: 1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      contenedorBtnTour.setAttribute('animation', `property: position; from: 2.2 1.6 -15; to: 2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtn.setAttribute('animation', `property: position; from: -1.65 1.6 -15; to: -1.65 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtnFundador.setAttribute('animation', `property: position; from: -0.55 1.1 -15; to: -0.55 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorBtnLabs.setAttribute('animation', `property: position; from: 0.55 1.6 -15; to: 0.55 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      contenedorNuevosLabs.setAttribute('animation', `property: position; from: 1.65 1.1 -15; to: 1.65 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
 
-      lineaFundador.setAttribute('animation__start', `property: line.start; from: -2.2 1.6 -15; to: -2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaFundador.setAttribute('animation__end', `property: line.end; from: -1.1 1.1 -15; to: -1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaFundador.setAttribute('animation__start', `property: line.start; from: -1.65 1.6 -15; to: -1.65 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaFundador.setAttribute('animation__end', `property: line.end; from: -0.55 1.1 -15; to: -0.55 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
 
-      lineaLabs.setAttribute('animation__start', `property: line.start; from: -1.1 1.1 -15; to: -1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaLabs.setAttribute('animation__end', `property: line.end; from: 0.0 1.6 -15; to: 0.0 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaLabs.setAttribute('animation__start', `property: line.start; from: -0.55 1.1 -15; to: -0.55 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaLabs.setAttribute('animation__end', `property: line.end; from: 0.55 1.6 -15; to: 0.55 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
 
-      lineaNuevosLabs.setAttribute('animation__start', `property: line.start; from: 0.0 1.6 -15; to: 0.0 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaNuevosLabs.setAttribute('animation__end', `property: line.end; from: 1.1 1.1 -15; to: 1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      
-      lineaTour.setAttribute('animation__start', `property: line.start; from: 1.1 1.1 -15; to: 1.1 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
-      lineaTour.setAttribute('animation__end', `property: line.end; from: 2.2 1.6 -15; to: 2.2 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaNuevosLabs.setAttribute('animation__start', `property: line.start; from: 0.55 1.6 -15; to: 0.55 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      lineaNuevosLabs.setAttribute('animation__end', `property: line.end; from: 1.65 1.1 -15; to: 1.65 1.1 -2.5; dur: ${dur}; easing: ${ease}`);
 
       if(document.querySelector('#panelPresentacionEsan')) {
           document.querySelector('#panelPresentacionEsan').setAttribute('removeAttribute', 'animation');
