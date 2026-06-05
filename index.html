@@ -338,10 +338,13 @@
     <video id="videoUni" src="video2.mp4" crossorigin="anonymous" playsinline webkit-playsinline preload="auto"></video>
     <video id="videoFundador" src="video6a.mp4" crossorigin="anonymous" playsinline webkit-playsinline preload="auto"></video>
     <video id="video8" src="cars.mp4" crossorigin="anonymous" playsinline webkit-playsinline preload="auto"></video>
-    <video id="video7a" src="video7a.mp4" crossorigin="anonymous" playsinline webkit-playsinline preload="auto"></video> 
+    <video id="video7a" src="video7a.mp4" crossorigin="anonymous" playsinline webkit-playsinline preload="auto"></video>
+    <video id="videoRobotica" src="robotica_175.mp4" crossorigin="anonymous" playsinline webkit-playsinline preload="auto"></video>
   </a-assets>
 
   <a-sky id="skyPrincipal" src="#imgLobby" radius="40" rotation="0 -90 0"></a-sky>
+
+  <a-videosphere id="esferaRobotica" src="#videoRobotica" rotation="0 -90 0" visible="false"></a-videosphere>
   
   <a-entity cubos-digitales></a-entity>
 
@@ -365,12 +368,13 @@
       <a-text value="Descubre nuestro legado y vive el futuro" color="#696a6d" width="2.0" align="left" position="-0.85 -0.10 0.02" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf"></a-text>
   </a-entity>
 
-  <a-entity id="panelPresentacionEsan" position="0 2.6 -15"
-            animation="property: position; to: 0 2.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-entity geometry="primitive: plane; width: 3.2; height: 0.6" material="shader: flat; color: #1A1A1A; opacity: 0.85; transparent: true"></a-entity>
-    <a-entity geometry="primitive: plane; width: 3.24; height: 0.64" position="0 0 -0.01" material="shader: flat; color: #FFFFFF; opacity: 0.5; transparent: true"></a-entity>
-    <a-text value="BIENVENIDO AL UNIVERSO ESAN" color="#E3173E" align="center" width="2.8" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 0.12 0.02"></a-text>
-    <a-text value="Descubre nuestro legado y vive el futuro" color="#DFDFDF" align="center" width="2.3" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 -0.14 0.02"></a-text>
+
+  <a-entity id="panelPresentacionEsan" position="0.55 2.35 -2.5" scale="0 0 0"
+            animation__entrar="property: scale; from: 0 0 0; to: 1 1 1; dur: 900; easing: easeOutBack; delay: 1200">
+    <a-entity geometry="primitive: plane; width: 5.2; height: 0.58" material="shader: flat; color: #1A1A1A; opacity: 0.85; transparent: true"></a-entity>
+    <a-entity geometry="primitive: plane; width: 5.24; height: 0.62" position="0 0 -0.01" material="shader: flat; color: #FFFFFF; opacity: 0.5; transparent: true"></a-entity>
+    <a-text value="BIENVENIDO AL UNIVERSO ESAN" color="#E3173E" align="center" width="4.6" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 0.11 0.02"></a-text>
+    <a-text value="Descubre nuestro legado y vive el futuro" color="#DFDFDF" align="center" width="4.0" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 -0.13 0.02"></a-text>
   </a-entity>
 
   <a-entity id="grupoCine" visible="false">
@@ -546,6 +550,16 @@
   <a-entity id="camara" camera look-controls position="0 1.6 0">
     <a-entity cursor="fuse: false; rayOrigin: mouse" raycaster="objects: .clickable"></a-entity>
 
+
+    <a-entity id="btnSalirVideo360" position="0 -0.46 -1.5" visible="false"
+              animation__enter="property: scale; to: 1.15 1.15 1.15; dur: 180; startEvents: mouseenter"
+              animation__leave="property: scale; to: 1 1 1; dur: 180; startEvents: mouseleave">
+      <a-circle class="clickable" radius="0.1" color="#E3173E" material="shader: flat"></a-circle>
+      <a-plane width="0.072" height="0.012" color="#FFFFFF" material="shader: flat" position="0 0 0.012" rotation="0 0 45"></a-plane>
+      <a-plane width="0.072" height="0.012" color="#FFFFFF" material="shader: flat" position="0 0 0.012" rotation="0 0 -45"></a-plane>
+      <a-text value="Salir 360°" color="#FFFFFF" align="center" width="0.9" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" position="0 -0.14 0.01"></a-text>
+    </a-entity>
+
     <a-entity id="panelMuyPronto" position="0 0 -1.8" visible="false" scale="0 0 0">
       <!-- Resplandor exterior -->
       <a-plane width="1.14" height="0.64" color="#E3173E" opacity="0.14" material="shader: flat; transparent: true" position="0 0 -0.012"></a-plane>
@@ -700,17 +714,44 @@ function cerrarPanelProno() {
     setTimeout(() => panelMuyPronto.setAttribute('visible', 'false'), 360);
 }
 
-function abrirYoutube() {
-  document.getElementById('youtubeFrame').src =
-    'https://www.youtube.com/embed/M8Y1e_UgtgY?autoplay=1&rel=0&modestbranding=1&hd=1&vq=hd1080';
-  document.getElementById('youtubeOverlay').style.display = 'block';
-}
-function cerrarYoutube() {
-  document.getElementById('youtubeFrame').src = '';
-  document.getElementById('youtubeOverlay').style.display = 'none';
+const videoRobotica = document.querySelector('#videoRobotica');
+const esferaRobotica = document.querySelector('#esferaRobotica');
+const btnSalirVideo360 = document.querySelector('#btnSalirVideo360');
+
+function abrirVideo360() {
+  // Ocultar jardín
+  skyPrincipal.setAttribute('visible', 'false');
+  [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs,
+   contenedorBtnYoutube, redNeuronal].forEach(el => { if(el) el.setAttribute('visible', 'false'); });
+  const ep = document.querySelector('#panelPresentacionEsan');
+  if(ep) ep.setAttribute('visible', 'false');
+  if (timerProno) { clearTimeout(timerProno); timerProno = null; }
+  panelMuyPronto.setAttribute('visible', 'false');
+  panelMuyPronto.setAttribute('scale', '0 0 0');
+
+  // Activar videosfera 360°
+  esferaRobotica.setAttribute('visible', 'true');
+  videoRobotica.currentTime = 0;
+  videoRobotica.play();
+  btnSalirVideo360.setAttribute('visible', 'true');
 }
 
-document.querySelector('#btnYoutube').addEventListener('click', abrirYoutube);
+function cerrarVideo360() {
+  videoRobotica.pause();
+  videoRobotica.currentTime = 0;
+  esferaRobotica.setAttribute('visible', 'false');
+  btnSalirVideo360.setAttribute('visible', 'false');
+
+  // Restaurar jardín
+  skyPrincipal.setAttribute('visible', 'true');
+  [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs,
+   contenedorBtnYoutube, redNeuronal].forEach(el => { if(el) el.setAttribute('visible', 'true'); });
+  const ep = document.querySelector('#panelPresentacionEsan');
+  if(ep) ep.setAttribute('visible', 'true');
+}
+
+document.querySelector('#btnYoutube').addEventListener('click', abrirVideo360);
+document.querySelector('#btnSalirVideo360').addEventListener('click', cerrarVideo360);
 document.querySelector('#btnCerrarProno').addEventListener('click', cerrarPanelProno);
 
 document.querySelector('#btnPausa').addEventListener('click', () => {
@@ -806,9 +847,11 @@ function finalizarVideo() {
         lineaYoutube.setAttribute('animation__end', `property: line.end; from: 2.75 1.6 -15; to: 2.75 1.6 -2.5; dur: ${dur}; easing: ${ease}`);
       }
 
-      if(document.querySelector('#panelPresentacionEsan')) {
-          document.querySelector('#panelPresentacionEsan').setAttribute('removeAttribute', 'animation');
-          document.querySelector('#panelPresentacionEsan').setAttribute('animation', `property: position; from: 0 2.6 -15; to: 0 2.6 -2.5; dur: ${dur}; easing: ${ease}`);
+      const ep = document.querySelector('#panelPresentacionEsan');
+      if(ep) {
+        ep.setAttribute('scale', '0 0 0');
+        ep.removeAttribute('animation__entrar');
+        ep.setAttribute('animation__entrar', 'property: scale; from: 0 0 0; to: 1 1 1; dur: 800; easing: easeOutBack');
       }
     }, 100);
 
