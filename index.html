@@ -6,6 +6,121 @@
     <script src="https://aframe.io/releases/1.4.0/aframe.min.js"></script>
     <script>
       // ========================================================
+      // FUNCIONES DE DIBUJO DE ICONOS (Canvas 2D)
+      // ========================================================
+      function drawHistoriaIcon(ctx, s) {
+        ctx.lineCap = 'round'; ctx.lineJoin = 'round';
+        ctx.fillStyle = '#e8e8e8';
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.22); ctx.lineTo(s*.16,s*.28); ctx.lineTo(s*.16,s*.78); ctx.lineTo(s*.5,s*.72); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.22); ctx.lineTo(s*.84,s*.28); ctx.lineTo(s*.84,s*.78); ctx.lineTo(s*.5,s*.72); ctx.closePath(); ctx.fill();
+        ctx.fillStyle = '#aaaaaa';
+        for(let i=0;i<4;i++){ ctx.fillRect(s*.2,s*(.36+i*.1),s*.22,s*.022); ctx.fillRect(s*.54,s*(.36+i*.1),s*.22,s*.022); }
+        ctx.strokeStyle='#aaaaaa'; ctx.lineWidth=s*.035;
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.22); ctx.lineTo(s*.5,s*.72); ctx.stroke();
+        ctx.strokeStyle='#777'; ctx.lineWidth=s*.028;
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.22); ctx.lineTo(s*.16,s*.28); ctx.lineTo(s*.16,s*.78); ctx.lineTo(s*.5,s*.72); ctx.lineTo(s*.84,s*.78); ctx.lineTo(s*.84,s*.28); ctx.closePath(); ctx.stroke();
+        ctx.strokeStyle='#ffffff'; ctx.lineWidth=s*.042;
+        ctx.beginPath(); ctx.moveTo(s*.16,s*.78); ctx.quadraticCurveTo(s*.5,s*.9,s*.84,s*.78); ctx.stroke();
+        ctx.fillStyle='#E3173E';
+        ctx.beginPath(); ctx.moveTo(s*.64,s*.17); ctx.lineTo(s*.76,s*.17); ctx.lineTo(s*.76,s*.42); ctx.lineTo(s*.7,s*.36); ctx.lineTo(s*.64,s*.42); ctx.closePath(); ctx.fill();
+      }
+
+      function drawFundadorIcon(ctx, s) {
+        ctx.fillStyle = '#ffffff';
+        ctx.beginPath(); ctx.arc(s*.5,s*.29,s*.17,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(s*.5,s*.82,s*.30,Math.PI,0); ctx.fill();
+        ctx.fillRect(s*.43,s*.42,s*.14,s*.11);
+        ctx.fillStyle = '#E3173E';
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.53); ctx.lineTo(s*.43,s*.60); ctx.lineTo(s*.5,s*.74); ctx.lineTo(s*.57,s*.60); ctx.closePath(); ctx.fill();
+      }
+
+      function drawCarrerasIcon(ctx, s) {
+        ctx.lineCap='round'; ctx.lineJoin='round';
+        function star4(cx,cy,r){ ctx.save(); ctx.translate(cx,cy); ctx.beginPath(); for(let i=0;i<8;i++){ const r2=i%2===0?r:r*.42; const a=(i*Math.PI/4)-Math.PI/2; i===0?ctx.moveTo(Math.cos(a)*r2,Math.sin(a)*r2):ctx.lineTo(Math.cos(a)*r2,Math.sin(a)*r2); } ctx.closePath(); ctx.fill(); ctx.restore(); }
+        // Nose cone
+        ctx.fillStyle='#ffffff';
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.07); ctx.lineTo(s*.36,s*.46); ctx.lineTo(s*.64,s*.46); ctx.closePath(); ctx.fill();
+        // Body
+        ctx.fillRect(s*.36,s*.44,s*.28,s*.32);
+        // Left fin
+        ctx.beginPath(); ctx.moveTo(s*.36,s*.60); ctx.lineTo(s*.17,s*.77); ctx.lineTo(s*.36,s*.77); ctx.closePath(); ctx.fill();
+        // Right fin
+        ctx.beginPath(); ctx.moveTo(s*.64,s*.60); ctx.lineTo(s*.83,s*.77); ctx.lineTo(s*.64,s*.77); ctx.closePath(); ctx.fill();
+        // Window dark
+        ctx.fillStyle='#0d0d1a';
+        ctx.beginPath(); ctx.arc(s*.5,s*.52,s*.076,0,Math.PI*2); ctx.fill();
+        // Window gleam
+        ctx.fillStyle='rgba(255,255,255,0.45)';
+        ctx.beginPath(); ctx.arc(s*.47,s*.49,s*.028,0,Math.PI*2); ctx.fill();
+        // Red flame
+        ctx.fillStyle='#E3173E';
+        ctx.beginPath(); ctx.moveTo(s*.39,s*.76); ctx.lineTo(s*.5,s*.96); ctx.lineTo(s*.61,s*.76); ctx.closePath(); ctx.fill();
+        // Yellow inner flame
+        ctx.fillStyle='rgba(255,210,50,0.95)';
+        ctx.beginPath(); ctx.moveTo(s*.43,s*.76); ctx.lineTo(s*.5,s*.87); ctx.lineTo(s*.57,s*.76); ctx.closePath(); ctx.fill();
+        // Decorative stars
+        ctx.fillStyle='#E3173E'; star4(s*.2,s*.2,s*.055);
+        ctx.fillStyle='#ffffff'; star4(s*.8,s*.15,s*.042); star4(s*.14,s*.5,s*.032);
+      }
+
+      function drawLabsIcon(ctx, s) {
+        ctx.lineCap='round'; ctx.lineJoin='round';
+        ctx.fillStyle='rgba(255,255,255,0.1)';
+        ctx.beginPath(); ctx.moveTo(s*.42,s*.14); ctx.lineTo(s*.42,s*.48); ctx.lineTo(s*.16,s*.80); ctx.quadraticCurveTo(s*.13,s*.89,s*.24,s*.90); ctx.lineTo(s*.76,s*.90); ctx.quadraticCurveTo(s*.87,s*.89,s*.84,s*.80); ctx.lineTo(s*.58,s*.48); ctx.lineTo(s*.58,s*.14); ctx.closePath(); ctx.fill();
+        ctx.fillStyle='#E3173E';
+        ctx.beginPath(); ctx.moveTo(s*.22,s*.77); ctx.lineTo(s*.42,s*.56); ctx.lineTo(s*.58,s*.56); ctx.lineTo(s*.78,s*.77); ctx.quadraticCurveTo(s*.84,s*.88,s*.76,s*.89); ctx.lineTo(s*.24,s*.89); ctx.quadraticCurveTo(s*.16,s*.88,s*.22,s*.77); ctx.fill();
+        ctx.strokeStyle='#ffffff'; ctx.lineWidth=s*.055;
+        ctx.beginPath(); ctx.moveTo(s*.42,s*.14); ctx.lineTo(s*.42,s*.48); ctx.lineTo(s*.16,s*.80); ctx.quadraticCurveTo(s*.13,s*.89,s*.24,s*.90); ctx.lineTo(s*.76,s*.90); ctx.quadraticCurveTo(s*.87,s*.89,s*.84,s*.80); ctx.lineTo(s*.58,s*.48); ctx.lineTo(s*.58,s*.14); ctx.stroke();
+        ctx.fillStyle='#ffffff'; ctx.fillRect(s*.35,s*.10,s*.30,s*.07);
+        ctx.fillStyle='rgba(255,255,255,0.85)';
+        ctx.beginPath(); ctx.arc(s*.37,s*.74,s*.040,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(s*.56,s*.78,s*.032,0,Math.PI*2); ctx.fill();
+        ctx.beginPath(); ctx.arc(s*.46,s*.67,s*.026,0,Math.PI*2); ctx.fill();
+      }
+
+      function drawTourIcon(ctx, s) {
+        ctx.lineCap='round'; ctx.lineJoin='round';
+        ctx.fillStyle='#ffffff';
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.10); ctx.lineTo(s*.88,s*.42); ctx.lineTo(s*.12,s*.42); ctx.closePath(); ctx.fill();
+        ctx.fillRect(s*.18,s*.40,s*.64,s*.46);
+        ctx.fillStyle='#0a0a14'; ctx.fillRect(s*.41,s*.63,s*.18,s*.23);
+        ctx.fillStyle='#E3173E'; ctx.fillRect(s*.23,s*.48,s*.15,s*.12); ctx.fillRect(s*.62,s*.48,s*.15,s*.12);
+        ctx.fillStyle='rgba(255,255,255,0.35)'; ctx.fillRect(s*.24,s*.49,s*.05,s*.04); ctx.fillRect(s*.63,s*.49,s*.05,s*.04);
+        ctx.strokeStyle='#E3173E'; ctx.lineWidth=s*.03;
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.01); ctx.lineTo(s*.5,s*.12); ctx.stroke();
+        ctx.fillStyle='#E3173E';
+        ctx.beginPath(); ctx.moveTo(s*.5,s*.01); ctx.lineTo(s*.5,s*.11); ctx.lineTo(s*.65,s*.06); ctx.closePath(); ctx.fill();
+      }
+
+      // ========================================================
+      // COMPONENTE: ICONO CANVAS
+      // ========================================================
+      AFRAME.registerComponent('canvas-icon', {
+        schema: { type: { type: 'string', default: 'historia' } },
+        init: function() {
+          const self = this;
+          this._apply = function() {
+            const mesh = self.el.getObject3D('mesh');
+            if (!mesh) return;
+            const size = 256;
+            const c = document.createElement('canvas');
+            c.width = size; c.height = size;
+            const ctx = c.getContext('2d');
+            const fns = { historia: drawHistoriaIcon, fundador: drawFundadorIcon, carreras: drawCarrerasIcon, labs: drawLabsIcon, tour: drawTourIcon };
+            if (fns[self.data.type]) fns[self.data.type](ctx, size);
+            const tex = new THREE.CanvasTexture(c);
+            mesh.material.map = tex;
+            mesh.material.transparent = true;
+            mesh.material.alphaTest = 0.01;
+            mesh.material.needsUpdate = true;
+          };
+          this.el.addEventListener('object3dset', this._apply);
+          setTimeout(this._apply, 50);
+        }
+      });
+
+      // ========================================================
       // COMPONENTE THREE.JS: CUBOS VIVOS (ROJO, CELESTE, BLANCO)
       // ========================================================
       AFRAME.registerComponent('cubos-digitales', {
@@ -115,7 +230,7 @@
 <a-scene>
 
   <a-assets>
-    <img id="imgLobby" src="jardinn.jpg">
+    <img id="imgLobby" src="jardinnn.jpg">
     <img id="imgAuditorio" src="btcss-1.jpg">
     <img id="imgAuditorio2" src="btcss-1.jpg"> 
     <img id="imgEvento" src="fuentte.jpg">
@@ -250,26 +365,16 @@
 
   <a-entity id="contenedorBoton" position="-2.2 1.6 -15"
             animation="property: position; to: -2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
-    <a-circle id="btnAccion" class="clickable" color="#000" opacity="0.8" radius="0.4"
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
+            radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
+            animation__pulse="property: scale; from: 1 1 1; to: 1.18 1.18 1.18; dur: 1800; loop: true; easing: easeInOutSine; dir: alternate"
+            animation__fade="property: material.opacity; from: 0.5; to: 0; dur: 1800; loop: true; easing: easeInOutSine; dir: alternate">
+    </a-ring>
+    <a-circle id="btnAccion" class="clickable" color="#0d0d1a" opacity="0.95" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="-0.06 0.08 0.02" rotation="0 0 14"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.015; height: 0.13" material="shader: flat; color: #FFFFFF" position="-0.12 0.01 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="-0.06 -0.05 0.02" rotation="0 0 -14"></a-entity>
-
-      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="0.06 0.08 0.02" rotation="0 0 -14"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.015; height: 0.13" material="shader: flat; color: #FFFFFF" position="0.12 0.01 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.12; height: 0.015" material="shader: flat; color: #FFFFFF" position="0.06 -0.05 0.02" rotation="0 0 14"></a-entity>
-
-      <a-entity geometry="primitive: plane; width: 0.015; height: 0.14" material="shader: flat; color: #FFFFFF" position="0 0.01 0.02"></a-entity>
-
-      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="-0.12 0.075 0.021"></a-circle>
-      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0.12 0.075 0.021"></a-circle>
-      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="-0.12 -0.055 0.021"></a-circle>
-      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0.12 -0.055 0.021"></a-circle>
-      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0 0.093 0.021"></a-circle>
-      <a-circle radius="0.0075" color="#FFFFFF" material="shader: flat" position="0 -0.065 0.021"></a-circle>
+      <a-plane width="0.65" height="0.65" canvas-icon="type: historia" material="shader: flat; transparent: true" position="0 0 0.02"></a-plane>
     </a-circle>
     <a-text value="Nuestra\nHistoria" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
     <a-text id="textoBoton" value="Nuestra\nHistoria" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
@@ -277,26 +382,16 @@
 
   <a-entity id="contenedorBotonFundador" position="-1.1 1.1 -15"
             animation="property: position; to: -1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
-    <a-circle id="btnFundador" class="clickable" color="#000" opacity="0.8" radius="0.4"
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
+            radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
+            animation__pulse="property: scale; from: 1 1 1; to: 1.18 1.18 1.18; dur: 2100; loop: true; easing: easeInOutSine; dir: alternate"
+            animation__fade="property: material.opacity; from: 0.5; to: 0; dur: 2100; loop: true; easing: easeInOutSine; dir: alternate">
+    </a-ring>
+    <a-circle id="btnFundador" class="clickable" color="#0d0d1a" opacity="0.95" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-circle radius="0.05" color="#FFFFFF" material="shader: flat" position="0 0.08 0.02"></a-circle>
-      
-      <a-entity geometry="primitive: plane; width: 0.022; height: 0.03" material="shader: flat; color: #FFFFFF" position="0 0.035 0.02"></a-entity>
-
-      <a-entity geometry="primitive: triangle; vertexA: -0.011 0.02 0; vertexB: -0.11 -0.05 0; vertexC: -0.011 -0.05 0" 
-                material="shader: flat; color: #FFFFFF" 
-                position="0 0 0.02"></a-entity>
-
-      <a-entity geometry="primitive: triangle; vertexA: 0.011 0.02 0; vertexB: 0.011 -0.05 0; vertexC: 0.11 -0.05 0" 
-                material="shader: flat; color: #FFFFFF" 
-                position="0 0 0.02"></a-entity>
-
-      <a-entity geometry="primitive: plane; width: 0.012; height: 0.05" material="shader: flat; color: #FFFFFF" position="0 -0.025 0.022"></a-entity>
-      <a-entity geometry="primitive: triangle; vertexA: 0 -0.05 0; vertexB: -0.006 -0.05 0; vertexC: 0 -0.062 0" material="shader: flat; color: #FFFFFF" position="0 0 0.022"></a-entity>
-      <a-entity geometry="primitive: triangle; vertexA: 0 -0.05 0; vertexB: 0 -0.062 0; vertexC: 0.006 -0.05 0" material="shader: flat; color: #FFFFFF" position="0 0 0.022"></a-entity>
-
+      <a-plane width="0.65" height="0.65" canvas-icon="type: fundador" material="shader: flat; transparent: true" position="0 0 0.02"></a-plane>
     </a-circle>
     <a-text value="Nuestro\nFundador" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
     <a-text id="textoBotonFundador" value="Nuestro\nFundador" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
@@ -304,14 +399,16 @@
 
   <a-entity id="contenedorBotonLabs" position="0.0 1.6 -15"
             animation="property: position; to: 0.0 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
-    <a-circle id="btnLaboratorios" class="clickable" color="#000" opacity="0.8" radius="0.4"
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
+            radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
+            animation__pulse="property: scale; from: 1 1 1; to: 1.18 1.18 1.18; dur: 1500; loop: true; easing: easeInOutSine; dir: alternate"
+            animation__fade="property: material.opacity; from: 0.5; to: 0; dur: 1500; loop: true; easing: easeInOutSine; dir: alternate">
+    </a-ring>
+    <a-circle id="btnLaboratorios" class="clickable" color="#0d0d1a" opacity="0.95" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-entity geometry="primitive: plane; width: 0.21; height: 0.21" material="shader: flat; color: #FFFFFF" position="0 0.06 0.02" rotation="65 0 45"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.13; height: 0.07" material="shader: flat; color: #FFFFFF" position="0 -0.05 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.015; height: 0.12" material="shader: flat; color: #FFFFFF" position="0.11 -0.01 0.021" rotation="0 0 -15"></a-entity>
-      <a-entity geometry="primitive: circle; radius: 0.012" color="#FFFFFF" material="shader: flat" position="0.13 -0.07 0.022"></a-entity>
+      <a-plane width="0.65" height="0.65" canvas-icon="type: carreras" material="shader: flat; transparent: true" position="0 0 0.02"></a-plane>
     </a-circle>
     <a-text value="Carreras que\nTransforman" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
     <a-text id="textoBotonLabs" value="Carreras que\nTransforman" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
@@ -319,15 +416,16 @@
 
   <a-entity id="contenedorNuevosLabs" position="1.1 1.1 -15"
             animation="property: position; to: 1.1 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
-    <a-circle id="btnNuevosLabs" class="clickable" color="#000" opacity="0.8" radius="0.4"
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
+            radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
+            animation__pulse="property: scale; from: 1 1 1; to: 1.18 1.18 1.18; dur: 2400; loop: true; easing: easeInOutSine; dir: alternate"
+            animation__fade="property: material.opacity; from: 0.5; to: 0; dur: 2400; loop: true; easing: easeInOutSine; dir: alternate">
+    </a-ring>
+    <a-circle id="btnNuevosLabs" class="clickable" color="#0d0d1a" opacity="0.95" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-entity geometry="primitive: plane; width: 0.045; height: 0.16" material="shader: flat; color: #FFFFFF" position="-0.05 0.05 0.02" rotation="0 0 -25"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.035; height: 0.05" material="shader: flat; color: #DFDFDF" position="-0.09 0.11 0.022" rotation="0 0 -25"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.04; height: 0.14" material="shader: flat; color: #FFFFFF" position="0.04 0.01 0.02" rotation="0 0 15"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.11; height: 0.02" material="shader: flat; color: #FFFFFF" position="0 -0.03 0.023"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.16; height: 0.03" material="shader: flat; color: #FFFFFF" position="-0.01 -0.09 0.02"></a-entity>
+      <a-plane width="0.65" height="0.65" canvas-icon="type: labs" material="shader: flat; transparent: true" position="0 0 0.02"></a-plane>
     </a-circle>
     <a-text value="Laboratorios\nTech" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
     <a-text id="textoBotonNuevosLabs" value="Laboratorios\nTech" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
@@ -335,20 +433,19 @@
 
   <a-entity id="contenedorBotonTour" position="2.2 1.6 -15"
             animation="property: position; to: 2.2 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
-    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.5" radius-inner="0.39" radius-outer="0.45" position="0 0 -0.01"></a-ring>
-    <a-circle id="btnTour" class="clickable" color="#000" opacity="0.8" radius="0.4"
+    <a-ring material="shader: flat; color: #FFFFFF; opacity: 0.85" radius-inner="0.41" radius-outer="0.45" position="0 0 -0.01"></a-ring>
+    <a-ring material="shader: flat; color: #E3173E; transparent: true; opacity: 0.5"
+            radius-inner="0.46" radius-outer="0.53" position="0 0 -0.02"
+            animation__pulse="property: scale; from: 1 1 1; to: 1.18 1.18 1.18; dur: 2000; loop: true; easing: easeInOutSine; dir: alternate"
+            animation__fade="property: material.opacity; from: 0.5; to: 0; dur: 2000; loop: true; easing: easeInOutSine; dir: alternate">
+    </a-ring>
+    <a-circle id="btnTour" class="clickable" color="#0d0d1a" opacity="0.95" radius="0.4"
               animation__mouseenter="property: scale; to: 1.2 1.2 1.2; dur: 300; startEvents: mouseenter"
               animation__mouseleave="property: scale; to: 1 1 1; dur: 300; startEvents: mouseleave">
-      <a-entity geometry="primitive: triangle; vertexA: 0 0.13 0; vertexB: -0.15 0.04 0; vertexC: 0.15 0.04 0" material="shader: flat; color: #FFFFFF" position="0 0 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.26; height: 0.02" material="shader: flat; color: #FFFFFF" position="0 0.03 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="-0.09 -0.04 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="-0.03 -0.04 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="0.03 -0.04 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.03; height: 0.11" material="shader: flat; color: #FFFFFF" position="0.09 -0.04 0.02"></a-entity>
-      <a-entity geometry="primitive: plane; width: 0.28; height: 0.02" material="shader: flat; color: #FFFFFF" position="0 -0.10 0.02"></a-entity>
+      <a-plane width="0.65" height="0.65" canvas-icon="type: tour" material="shader: flat; transparent: true" position="0 0 0.02"></a-plane>
     </a-circle>
-    <a-text value="Tour del\nCampus" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
-    <a-text id="textoBotonTour" value="Tour del\nCampus" align="center" baseline="top" width="1.2" wrap-count="12" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
+    <a-text value="Tour del Campus\n(Muy Pronto)" align="center" baseline="top" width="1.2" wrap-count="16" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#000000" position="0.01 -0.49 0.04"></a-text>
+    <a-text id="textoBotonTour" value="Tour del Campus\n(Muy Pronto)" align="center" baseline="top" width="1.2" wrap-count="16" font="https://cdn.aframe.io/fonts/Roboto-msdf.json" shader="msdf" color="#FFFFFF" position="0 -0.48 0.05"></a-text>
   </a-entity>
 
   <a-entity id="camara" camera look-controls position="0 1.6 0">
@@ -522,7 +619,7 @@ function finalizarVideo() {
     if(videoActual.id === 'video8') textoBotonLabs.setAttribute('value', 'Carreras que\nTransforman');
     if(videoActual.id === 'video7a') textoBotonNuevosLabs.setAttribute('value', 'Laboratorios\nTech');
     
-    textoBotonTour.setAttribute('value', 'Tour del\nCampus');
+    textoBotonTour.setAttribute('value', 'Tour del Campus\n(Muy Pronto)');
 
     const KissAnimacion = [
       contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnTour,
