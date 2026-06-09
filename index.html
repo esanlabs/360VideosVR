@@ -465,7 +465,7 @@
               animation__end="property: line.end; to: 1.65 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
     <a-entity id="lineaYoutube"
-              line="start: 1.65 1.1 -15; end: 2.75 1.6 -15; color: #E3173E; opacity: 0.6"
+              line="start: 1.65 1.1 -15; end: 2.75 1.6 -15; color: #FFFFFF; opacity: 0.6"
               animation__start="property: line.start; to: 1.65 1.1 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000"
               animation__end="property: line.end; to: 2.75 1.6 -2.5; dur: 8000; easing: easeOutCubic; delay: 10000">
     </a-entity>
@@ -828,7 +828,7 @@ function finalizarVideo() {
     lineaFundador.setAttribute('line', {start: '-1.65 1.6 -15', end: '-0.55 1.1 -15', color: '#FFFFFF'});
     lineaLabs.setAttribute('line', {start: '-0.55 1.1 -15', end: '0.55 1.6 -15', color: '#FFFFFF'});
     lineaNuevosLabs.setAttribute('line', {start: '0.55 1.6 -15', end: '1.65 1.1 -15', color: '#FFFFFF'});
-    if(lineaYoutube) lineaYoutube.setAttribute('line', {start: '1.65 1.1 -15', end: '2.75 1.6 -15', color: '#E3173E'});
+    if(lineaYoutube) lineaYoutube.setAttribute('line', {start: '1.65 1.1 -15', end: '2.75 1.6 -15', color: '#FFFFFF'});
 
     [contenedorBtn, contenedorBtnFundador, contenedorBtnLabs, contenedorNuevosLabs, contenedorBtnYoutube, redNeuronal, document.querySelector('#panelPresentacionEsan')].forEach(el => { if(el) el.setAttribute('visible', 'true'); });
 
